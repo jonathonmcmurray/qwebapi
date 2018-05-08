@@ -27,7 +27,7 @@ This example can be accessed via browser, wget, another q session etc.
 ```
 jonny@grizzly ~ $ wget -O - -q http://localhost:8104/gettime
 {"time":"2018-05-08D21:36:32.125999000"}
-jonny@grizzly ~/git/ws.q (master) $ wget -O - -q http://localhost:8104/example?user=jonny&num=3
+jonny@grizzly ~ $ wget -O - -q http://localhost:8104/example?user=jonny&num=3
 {"user":"jonny","response":[{"col1":56701412,"col2":2125076200,"col3":1574348340},
  {"col1":607727242,"col2":1753511110,"col3":2059906728},
  {"col1":1321772178,"col2":1568639384,"col3":1971895475},
@@ -44,7 +44,7 @@ jonny@grizzly ~/git/ws.q (master) $ wget -O - -q http://localhost:8104/example?u
 
 Things that need to be done:
 
-[] Handle POST requests
-[] Required & optional parameters
-[] Example with TorQ integration? (FSP fork)
-[] Replace urlencode definition with reQ (?)
+- [ ] Handle POST requests
+- [ ] Required & optional parameters
+- [ ] Example with TorQ integration? (FSP fork)
+- [ ] Replace urlencode definition with reQ (?)
