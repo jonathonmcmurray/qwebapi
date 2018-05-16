@@ -37,8 +37,9 @@ jonny@grizzly ~ $ wget -O - -q 'http://localhost:8104/example?user=jonny&num=3'
 
 Things that need to be done:
 
-- [ ] Handle POST requests (inc. JSON body)
+- [X] Handle POST requests (inc. JSON body)
 - [ ] Required & optional parameters
 - [ ] Example with TorQ integration? (FSP fork)
-- [ ] Replace urlencode definition with reQ (?)
+- [X] Replace urlencode definition with reQ (?)
 - [X] Error handling of function execution
+- [ ] Generalise `.z.pp` and `.z.ph` - refactor shared code into other functions
