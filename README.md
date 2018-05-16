@@ -42,4 +42,5 @@ Things that need to be done:
 - [ ] Example with TorQ integration? (FSP fork)
 - [X] Replace urlencode definition with reQ (?)
 - [X] Error handling of function execution
-- [ ] Generalise `.z.pp` and `.z.ph` - refactor shared code into other functions
+- [X] Generalise `.z.pp` and `.z.ph` - refactor shared code into other functions
+- [ ] Support for authentication (?)
