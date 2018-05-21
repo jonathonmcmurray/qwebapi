@@ -35,3 +35,18 @@ prms:{.req.urldecode last "?"vs x 0}                                            
   a:@[a;where 10<>type each a;string];                                              //string non-strings for .Q.def
   :.h.hy[`json] xc[`POST;getf x;a,prms b];                                          //run function & return as JSON
  }
+
+/ AUTHORIZATION - start with -auth {file.txt} to enable Basic HTTP Auth
+/ file.txt format = user:pass on each line
+
+if[`auth in key o:.Q.opt .z.x;
+   auth:read0 first hsym `$o`auth;                                                  //load authorized user:pass combos
+   .z.ac:{                                                                          //set .z.ac to check auth
+     a:6_x[1]`Authorization;                                                        //drop "Basic " - only basic HTTP auth supported
+     if[0=count a;:(0;"")];                                                         //if no user:pass given, deny access
+     if[(u:.req.b64decode a) in auth;                                               //decode user:pass, check if authorized
+        :(1;first ":" vs u);                                                        //authorize, get username
+       ];
+     :(0;"");                                                                       //if not authorized, deny access
+   }
+  ];
