@@ -10,7 +10,7 @@ example:{[user;num;fields]
   d[`response]:flip fields!flip c cut (num*c:count fields)?0Wi;
   :d;
  }
-.api.define[`example;`user`num`fields!(`username;10;`$"col1 col2 col3")];
+.api.define[`example;`user`num`fields!(`username;10;`$"col1 col2 col3");`user;`POST];
 
 gettime:{[] enlist[`time]!enlist .z.P}
-.api.define[`gettime;()!()]
+.api.define[`gettime;()!();();`]
