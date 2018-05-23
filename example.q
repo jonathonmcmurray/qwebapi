@@ -14,3 +14,6 @@ example:{[user;num;fields]
 
 gettime:{[] enlist[`time]!enlist .z.P}
 .api.define[`gettime;()!();();`]
+
+mapval:{[input;dict] dict@input}
+.api.define[`mapval;`input`dict!(`;`a`b`c!1 2 3);`input;`]

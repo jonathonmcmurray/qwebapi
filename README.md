@@ -3,6 +3,8 @@
 A simple framework/library for creating a web API powered by kdb+/q. Provided
 with a trivial example API application (see `example.q`)
 
+Read the blog post: https://jonathonmcmurray.github.io/kdb/q/rest/api/2018/05/22/rest-api-in-kdb.html
+
 ## Usage
 
 Usage of the library is fairly simple. Create a standard q function as usual,
@@ -33,14 +35,50 @@ jonny@grizzly ~ $ wget -O - -q 'http://localhost:8104/example?user=jonny&num=3'
  {"col1":293447866,"col2":424844191,"col3":209668615}]}
 ```
 
+## Authorization
+
+There is inbuilt support for HTTP basic authorization, making use of an
+authorization file similar to kdb+ itself uses with the `-u`/`-U` flag. This
+file contains pairs of `user:pass` on each line, where `pass` can be plaintext
+or the md5 hash of the password. For example, using the following file:
+
+```
+$ more auth.txt
+user:5f4dcc3b5aa765d61d8327deb882cf99
+anon:example
+```
+
+It is possible to login with `user:password` or `anon:example`:
+
+```
+q).Q.hg`$":http://user:notpassword@localhost:1234/gettime"  //failed login example
+""
+q).Q.hg`$":http://user:password@localhost:1234/gettime"
+"{\"time\":\"2018-05-23D13:16:26.227135000\"}"
+q).Q.hg`$":http://anon:example@localhost:1234/gettime"
+"{\"time\":\"2018-05-23D13:16:30.522253000\"}"
+```
+
+Note that this does enforce one limitation on passwords; they cannot be 32
+digit hexdecimal numbers, as these would be indistinguishable from an md5 hash
+and therefore would allow logging in using md5 hash, thus defeating the point
+of not storing passwords in plaintext.
+
+Adding support for other types of HTTP authentication is simply a case of
+adding a `.api.verify.{type}` function where `{type}` is the authentication
+type to be added. For example, Basic authentication is handled by
+`.api.verify.basic`. Credentials will automatically be passed to the relevant
+function based on the type in the request Authorization HTTP header.
+
 ## Roadmap
 
 Things that need to be done:
 
 - [X] Handle POST requests (inc. JSON body)
 - [X] Required & optional parameters
-- [ ] Example with TorQ integration? (FSP fork)
 - [X] Replace urlencode definition with reQ (?)
 - [X] Error handling of function execution
 - [X] Generalise `.z.pp` and `.z.ph` - refactor shared code into other functions
 - [X] Support for authentication (?)
+- [ ] Proper documentation
+
