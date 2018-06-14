@@ -30,7 +30,8 @@ prms:{.req.urldecode last "?"vs x 0}                                            
 .z.pp:{[x] /x - (request;headers)
   /* HTTP POST handler */
   b:spltp x;                                                                        //split POST body from params
-  a:prs[x[1]`$"Content-Type"]b[1];                                                  //parse body depending on Content-Type
+  x[1]:lower[key x 1]!value x 1;                                                    //lower case keys
+  a:prs[x[1]`$"content-type"]b[1];                                                  //parse body depending on Content-Type
   if[99h<>type a;a:()];                                                             //if body doesn't parse to dict, ignore
   a:@[a;where 10<>type each a;string];                                              //string non-strings for .Q.def
   :.h.hy[`json] xc[`POST;getf x;a,prms b];                                          //run function & return as JSON
