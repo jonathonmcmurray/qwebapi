@@ -1,0 +1,20 @@
+package:
+  name: webapi
+  version: 0.1.0
+
+build:
+  number: 0
+  noarch: true
+
+source:
+  git_url: https://github.com/jonathonmcmurray/qwebapi.git
+
+requirements:
+  run:
+    - qutil
+    - req
+
+about:
+  home: https://github.com/jonathonmcmurray/qwebapi
+  license: MIT
+  summary: Library for creating a web/HTTP api powered by kdb+/q

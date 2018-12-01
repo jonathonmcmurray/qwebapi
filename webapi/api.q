@@ -1,9 +1,6 @@
 /api.q - a generic framework for building web APIs backed by kdb+
 \d .api
 
-/load reQ library for HTTP related functions
-\l reQ/req.q
-
 funcs:([func:`$()];defaults:();required:();methods:())                              //config of funcs
 define:{[f;d;r;m].api.funcs[f]:`defaults`required`methods!(d;(),r;$[`~m;`POST`GET;(),m])} //function to define an API function
 

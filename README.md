@@ -7,6 +7,26 @@ Read the blog post: https://jonathonmcmurray.github.io/kdb/q/rest/api/2018/05/22
 
 ## Usage
 
+The library is developed with [qutil](https://github.com/nugend/qutil) in mind.
+To use with qutil, install package to location of `QPATH` env var & within q
+call
+
+```q
+.utl.require"webapi"
+```
+
+For simplest installation, install via conda (from Anaconda/Miniconda
+installation) e.g.
+
+```
+$ conda install -c jmcmurray qwebapi
+```
+
+This will ensure all dependencies (incl. `qutil`) are installed.
+
+To use _without_ qutil, download this repo & [reQ](https://github.com/jonathonmcmurray/reQ)
+and load `req.q` first followed by `webapi/api.q` from this repo.
+
 Usage of the library is fairly simple. Create a standard q function as usual,
 and then use `.api.define` to add it to the public API, while defining
 defaults (and therefore datatypes). Examples are seen in `example.q`
