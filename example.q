@@ -1,7 +1,6 @@
 /Example Web API application
 
-/load API library
-\l api.q
+.utl.require"webapi"
 
 example:{[user;num;fields]
   d:()!();

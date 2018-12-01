@@ -1,5 +1,8 @@
 # qwebapi
 
+[![Anaconda-Server Badge](https://anaconda.org/jmcmurray/webapi/badges/version.svg)](https://anaconda.org/jmcmurray/webapi)
+[![Anaconda-Server Badge](https://anaconda.org/jmcmurray/webapi/badges/downloads.svg)](https://anaconda.org/jmcmurray/webapi)
+
 A simple framework/library for creating a web API powered by kdb+/q. Provided
 with a trivial example API application (see `example.q`)
 
