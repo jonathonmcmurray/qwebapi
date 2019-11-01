@@ -4,6 +4,8 @@
 funcs:([func:`$()];defaults:();required:();methods:())                              //config of funcs
 define:{[f;d;r;m].api.funcs[f]:`defaults`required`methods!(d;(),r;$[`~m;`POST`GET;(),m])} //function to define an API function
 
+ret:$[.z.K>=3.7;{.h.hy[1b;x;-35!(6;y)]};.h.hy];
+
 xc:{[m;f;x] /m- HTTP method,f - function name (sym), x - arguments
   /* execute given function with arguments, error trap & return result as JSON */
   if[not f in key .api.funcs;:.j.j "Invalid function"];                             //error on invalid functions
@@ -14,14 +16,14 @@ xc:{[m;f;x] /m- HTTP method,f - function name (sym), x - arguments
   :.[{.j.j x . y};(value f;value p#x);{.j.j enlist[`error]!enlist x}];              //error trap, build JSON for fail
  }
 
-prs:.req.ty[`json`form]!(.j.k;.req.urldecode)                                       //parsing functions based on Content-Type
+prs:.req.ty[`json`form]!(.j.k;.url.dec)                                             //parsing functions based on Content-Type
 getf:{`$first "?"vs first " "vs x 0}                                                //function name from raw request
 spltp:{0 1_'(0,first ss[x 0;" "])cut x 0}                                           //split POST body from params
-prms:{.req.urldecode last "?"vs x 0}                                                //parse URL params into kdb dict
+prms:{.url.dec last "?"vs x 0}                                                      //parse URL params into kdb dict
 
 .z.ph:{[x] /x - (request;headers)
   /* HTTP GET handler */
-  :.h.hy[`json] xc[`GET;getf x;prms x];                                             //run function & return as JSON
+  :ret[`json] xc[`GET;getf x;prms x];                                               //run function & return as JSON
  }
 
 .z.pp:{[x] /x - (request;headers)
@@ -31,7 +33,7 @@ prms:{.req.urldecode last "?"vs x 0}                                            
   a:prs[x[1]`$"content-type"]b[1];                                                  //parse body depending on Content-Type
   if[99h<>type a;a:()];                                                             //if body doesn't parse to dict, ignore
   a:@[a;where 10<>type each a;string];                                              //string non-strings for .Q.def
-  :.h.hy[`json] xc[`POST;getf x;a,prms b];                                          //run function & return as JSON
+  :ret[`json] xc[`POST;getf x;a,prms b];                                            //run function & return as JSON
  }
 
 / AUTHORIZATION - start with -auth {file.txt} to enable Basic HTTP Auth
